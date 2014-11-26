@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using GameObjectList = System.Collections.Generic.List<UnityEngine.GameObject>;
 
 // HexManager handles the hexagonal grid of hexagon sprites
-public class HexManager : MonoBehaviour
+public class HexGridManager : MonoBehaviour
 {
     
 	public float Radius = 1.0f;
@@ -106,6 +106,11 @@ public class HexManager : MonoBehaviour
         SpriteRenderer spriteInstance = Instantiate(sprite, position, sprite.transform.rotation) as SpriteRenderer;
         sprites[uv].Add(spriteInstance);
 	}
+
+    // Move a sprite to destination
+    private void MoveSprite(SpriteRenderer sprite, Vector2 destination){
+
+    }
 
 	// property that computes the board boundaries as rectangle coodinates
 	public static Rect RectBoardBoundaries {    
