@@ -8,11 +8,11 @@ using GameObjectList = System.Collections.Generic.List<UnityEngine.GameObject>;
 // HexManager handles the hexagonal grid of hexagon sprites
 public class HexManager : MonoBehaviour {
 	
-	public float radius = 1.0f;
-	public float hexProportion = 0.9f;
+	public float Radius = 1.0f;
+	public float HexProportion = 0.9f;
 	
-	public GameObject hexagonPrefab;
-	public int size = 5; //size of the grid
+	public GameObject HexagonPrefab;
+	public int Size = 5; //size of the grid
 	private static Dictionary<Vector2, GameObject> hexagons;
 	private static Rect rectBoardBoundaries = new Rect(0,0,0,0);
 	
@@ -25,8 +25,8 @@ public class HexManager : MonoBehaviour {
 		// central hexagon is of (0,0) coordinates
 		hexagons = new Dictionary<Vector2, GameObject>();
 		
-		for(int u = -(size-1); u < size; u++)
-		for(int v = -(size-1); v < size; v++){
+		for(int u = -(Size-1); u < Size; u++)
+		for(int v = -(Size-1); v < Size; v++){
 			
 			Vector2 hexCoord = new Vector2(u,v);
 
@@ -44,7 +44,7 @@ public class HexManager : MonoBehaviour {
 		
 		// place the hex 
 		Vector3 hex_pos = this.GetTransformCoordinates(hexCoord);
-		GameObject hexagon = Instantiate(hexagonPrefab,hex_pos,hexagonPrefab.transform.rotation) as GameObject;
+		GameObject hexagon = Instantiate(HexagonPrefab,hex_pos,HexagonPrefab.transform.rotation) as GameObject;
 		
 		// change the name of the hexagon, adding hexagonal coordinates, to make the game scene easier to debug
 		hexagon.name += " (" + hexCoord[0] + "," + hexCoord[1] + ")";
@@ -92,8 +92,8 @@ public class HexManager : MonoBehaviour {
 		float v = hexCoord[1];
 		float h = 0;
 		
-		float x = Mathf.Sqrt(3.0f) * radius * u - Mathf.Sqrt(3.0f) * radius / 2.0f * v;
-		float y = 3 * radius * v / 2.0f;
+		float x = Mathf.Sqrt(3.0f) * Radius * u - Mathf.Sqrt(3.0f) * Radius / 2.0f * v;
+		float y = 3 * Radius * v / 2.0f;
 		return new Vector3(x, y, h);
 	}
 
