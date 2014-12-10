@@ -17,7 +17,7 @@ public static class HexUtil
 			) / 2;
     }
 	
-    // true if the to coordiantes are adjacent
+    // True if the to coordiantes are adjacent.
     public static bool IsAdjacent (Vector2 hexCoord1, Vector2 hexCoord2)
     {
 		
@@ -26,7 +26,7 @@ public static class HexUtil
         return false;	
     }
 	
-    // return an array with all the adjacents hexagonal coordinates
+    // Return an array with all the adjacents hexagonal coordinates.
     public static Vector2[] GetAdjacentCoords (Vector2 hexCoord)
     {
 		

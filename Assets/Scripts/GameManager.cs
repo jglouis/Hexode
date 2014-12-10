@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-//This script will be the master script concerning the game rules
+// This script will be the master script concerning the game rules.
 public class GameManager : MonoBehaviour
 {
   
-    //singleton
+    // Singleton
     static GameManager instance;
   
     //get the singleton
@@ -12,11 +12,11 @@ public class GameManager : MonoBehaviour
         get {
             if (instance == null) {
                 // This is where the magic happens.
-                //  FindObjectOfType(...) returns the first GameMaster object in the scene.
+                // FindObjectOfType(...) returns the first GameMaster object in the scene.
                 instance = FindObjectOfType (typeof(GameManager)) as GameManager;
             }
       
-            // If it is still null, create a new instance
+            // If it is still null, create a new instance.
             if (instance == null) {
                 GameObject obj = new GameObject ("Game Master");
                 obj.AddComponent (typeof(NetworkView));              
