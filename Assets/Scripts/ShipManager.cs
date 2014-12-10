@@ -6,19 +6,18 @@ public class ShipManager : MonoBehaviour
 {
     public SpriteRenderer ShipSprite;
 
-    // List of all the ship sprites.
-    List<SpriteRenderer> shipSprites = new List<SpriteRenderer> ();
-
     void Start ()
     {
-        // Put a ship sprite in each case.
-        foreach (var k in HexGridManager.Hexagons.Keys) {
-            CreateSpaceShip (k);
-        }
+        // Put a ship sprite at (0,0).
+        var s = CreateSpaceShip (Vector2.zero);
+
+        // Move the sprite 
+        MoveSpaceShip (s, new Vector2 (2, 2), 0.8f);
+
     }
 
     // Instantiate a space ship at hex coord (u,v).
-    void CreateSpaceShip (Vector2 uv)
+    GameObject CreateSpaceShip (Vector2 uv)
     {
         var sprite = Instantiate (ShipSprite) as SpriteRenderer;
         // Make the ship a child of the ShipManager gameobject.
@@ -27,6 +26,13 @@ public class ShipManager : MonoBehaviour
 
         sprite.transform.position = HexGridManager.GetTransformCoordinates (uv);
 
+        return sprite.gameObject;
+    }
 
+    // Move a space ship to destination (in hexagonal coordinate) in given time duration (in second).
+    void MoveSpaceShip (GameObject spaceShip, Vector2 destination, float duration)
+    {
+        var dest = HexGridManager.GetTransformCoordinates (destination);
+        LeanTween.move (spaceShip, dest, duration).setEase (LeanTweenType.easeInQuad);
     }
 }
