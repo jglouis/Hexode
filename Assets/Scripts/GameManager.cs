@@ -28,4 +28,29 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
+
+    // Some tests...
+
+    Game game;
+
+
+    void Start ()
+    {
+        Debug.Log ("Starting a game...");
+       
+        Player p1 = new Player ();
+        Player p2 = new Player ();
+        game = new Game (p1, p2);
+        game.Start ();
+
+        InvokeRepeating ("NextPhase", 0, 5f);
+
+        // Create a ship.
+        SpaceShip ship = new SpaceShip (Weight.Light, 3, 1);
+    }
+
+    void NextPhase ()
+    {
+        game.NextPhase ();
+    }
 }
