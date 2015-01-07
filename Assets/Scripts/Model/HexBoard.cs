@@ -7,12 +7,11 @@ using System.Collections.Generic;
 public class HexBoard
 {
     // Dictionary containing all the ships.
-    // Key is the hexagonal coordinates.
-    Dictionary<Vector2, SpaceShip> ships;
+    Dictionary<SpaceShip, Vector2> ships;
 
     public HexBoard ()
     {
         // Initialize the ships Dictionary.
-        ships = new Dictionary<Vector2, SpaceShip> ();
+        ships = new Dictionary<SpaceShip, Vector2> ();
     }
 }
