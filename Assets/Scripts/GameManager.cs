@@ -29,6 +29,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // UI
+    public void OnClick ()
+    {
+        Debug.Log ("button pushed");
+    }
+
+
     // Some tests...
 
     Game game;
