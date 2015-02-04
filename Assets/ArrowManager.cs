@@ -1,12 +1,19 @@
 ﻿using UnityEngine;
+using Vectrosity;
 using System.Collections;
 
 public class ArrowManager : MonoBehaviour
 {
+    public Material LineMaterial;
 
     Vector3 pos1 = Vector3.zero; 
     Vector3 pos2 = Vector3.zero;
-    float objectHeight = 1.0f; // 2.0 for a cylinder, 1.0 for a cube
+    VectorLine arrow;
+
+    void Start ()
+    {
+        arrow = new VectorLine ("Arrow", new Vector3[0], LineMaterial, 6.0f);
+    }
     
     void Update ()
     {        
@@ -22,13 +29,12 @@ public class ArrowManager : MonoBehaviour
             pos2 = Camera.main.ScreenToWorldPoint (pos2); 
             
         }
-        
-        if (pos2 != pos1) {
-            var v3 = pos2 - pos1;
-            transform.position = pos1 + (v3) / 2.0f;
-            transform.localScale = new Vector3 (v3.magnitude / objectHeight, transform.localScale.y, transform.localScale.z);
-            transform.rotation = Quaternion.FromToRotation (Vector3.right, v3);
-        }
+
+        // Draw the Vectrosity arrow.
+        arrow.points3.Clear ();
+        arrow.points3.Add (pos1);
+        arrow.points3.Add (pos2);
+        arrow.Draw ();
     }
 
 }
