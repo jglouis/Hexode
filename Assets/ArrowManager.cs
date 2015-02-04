@@ -4,7 +4,9 @@ using System.Collections;
 
 public class ArrowManager : MonoBehaviour
 {
+    public float LineThickness = 12.0f;
     public Material LineMaterial;
+    public Texture2D ArrowEndCap;
 
     Vector3 pos1 = Vector3.zero; 
     Vector3 pos2 = Vector3.zero;
@@ -12,7 +14,11 @@ public class ArrowManager : MonoBehaviour
 
     void Start ()
     {
-        arrow = new VectorLine ("Arrow", new Vector3[0], LineMaterial, 6.0f);
+        arrow = new VectorLine ("Arrow", new Vector3[2], LineMaterial, LineThickness, LineType.Continuous, Joins.Weld);
+
+        // Set the end cap of the arrow.
+        VectorLine.SetEndCap ("ArrowEndCap", EndCap.Front, LineMaterial, ArrowEndCap);
+        arrow.endCap = "ArrowEndCap";
     }
     
     void Update ()
@@ -32,8 +38,8 @@ public class ArrowManager : MonoBehaviour
 
         // Draw the Vectrosity arrow.
         arrow.points3.Clear ();
-        arrow.points3.Add (pos1);
         arrow.points3.Add (pos2);
+        arrow.points3.Add (pos1);
         arrow.Draw ();
     }
 
