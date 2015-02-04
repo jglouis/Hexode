@@ -14,10 +14,10 @@ public class ArrowManager : MonoBehaviour
 
     void Start ()
     {
-        arrow = new VectorLine ("Arrow", new Vector3[2], LineMaterial, LineThickness, LineType.Continuous, Joins.Weld);
+        arrow = new VectorLine ("Arrow", new Vector3[2], LineMaterial, LineThickness);
 
         // Set the end cap of the arrow.
-        VectorLine.SetEndCap ("ArrowEndCap", EndCap.Front, LineMaterial, ArrowEndCap);
+        VectorLine.SetEndCap ("ArrowEndCap", EndCap.Front, LineMaterial, -1.0f, ArrowEndCap);
         arrow.endCap = "ArrowEndCap";
     }
     
