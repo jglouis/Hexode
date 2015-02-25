@@ -14,4 +14,10 @@ public class HexBoard
         // Initialize the ships Dictionary.
         ships = new Dictionary<SpaceShip, Vector2> ();
     }
+
+    // Add a space ship to the board at the given coordinates.
+    public void Add (SpaceShip ship, Vector2 uv)
+    {
+        ships [ship] = uv;
+    }
 }

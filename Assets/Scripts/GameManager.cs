@@ -1,9 +1,23 @@
 ﻿using UnityEngine;
+using System;
+
+// A delegate type for hooking up change phase notifications.
+public delegate void ChangedPhaseHandler (object sender,RoundAndPhaseEventArgs e);
+
+public class RoundAndPhaseEventArgs:EventArgs
+{
+    public int Round;
+    public Game.Phase Phase;
+    public RoundAndPhaseEventArgs (int round, Game.Phase phase)
+    {
+        this.Round = round;
+        this.Phase = phase;
+    } 
+}
 
 // This script will be the master script concerning the game rules.
 public class GameManager : MonoBehaviour
 {
-  
     // Singleton
     static GameManager instance;
   
@@ -29,11 +43,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Event that is fired each time a new phase begins.
+    public event ChangedPhaseHandler ChangedPhase;
+
+    // Invoke the event.
+    void onChangedPhase (RoundAndPhaseEventArgs e)
+    {
+        if (ChangedPhase != null)
+            ChangedPhase (this, e);
+    }
+
     // UI
     public void OnClick ()
     {
-        Debug.Log ("button pushed");
+        NextPhase ();
     }
+
+
 
 
     // Some tests...
@@ -50,8 +76,6 @@ public class GameManager : MonoBehaviour
         game = new Game (p1, p2);
         game.Start ();
 
-        InvokeRepeating ("NextPhase", 0, 5f);
-
         // Create a ship.
         SpaceShip ship = new SpaceShip (Weight.Light, 3, 1);
     }
@@ -59,5 +83,6 @@ public class GameManager : MonoBehaviour
     void NextPhase ()
     {
         game.NextPhase ();
+        onChangedPhase (new RoundAndPhaseEventArgs (game.CurrentRound, game.CurrentPhase));
     }
 }

@@ -1,20 +1,35 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
+using System;
 
 // Component responsible for displaying ships.
 public class ShipManager : MonoBehaviour
 {
     public SpriteRenderer ShipSprite;
 
+//    void Start ()
+//    {
+//        // Put a ship sprite at (0,0).
+//        var s = CreateSpaceShip (Vector2.zero);
+//
+//        // Move the sprite 
+//        MoveSpaceShip (s, new Vector2 (2, 2), 0.8f);
+//
+//    }
+
+    // Observe the GameManager for a turn to be completed.
     void Start ()
     {
-        // Put a ship sprite at (0,0).
-        var s = CreateSpaceShip (Vector2.zero);
-
-        // Move the sprite 
-        MoveSpaceShip (s, new Vector2 (2, 2), 0.8f);
-
+        GameManager.Instance.ChangedPhase += new ChangedPhaseHandler (UpdateBoard);
     }
+
+    void UpdateBoard (object sender, RoundAndPhaseEventArgs e)
+    {
+        int round = e.Round;
+        Game.Phase phase = e.Phase;
+        Debug.Log (round + " " + phase);
+    }
+
+
 
     // Instantiate a space ship at hex coord (u,v).
     GameObject CreateSpaceShip (Vector2 uv)

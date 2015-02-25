@@ -26,6 +26,18 @@ public class Game
     int currentRound; // the current round number
     Phase currentPhase;
 
+    public int CurrentRound {
+        get {
+            return currentRound;
+        }
+    }
+
+    public Phase CurrentPhase {
+        get {
+            return currentPhase;
+        }
+    }
+
     HexBoard board;
 
     // Create a new 2 player game.
