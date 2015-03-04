@@ -54,6 +54,10 @@ public class Game
 
     public HexBoard Board {
         get {
+            if (board == null) {
+                // Create an empty board.
+                board = new HexBoard ();
+            }
             return board;
         }
     }
@@ -65,8 +69,6 @@ public class Game
         currentRound = 1;
         currentPhase = Phase.Start;
 
-        // Create an empty board.
-        board = new HexBoard ();
     }
 
     // Proceed to the next phase.

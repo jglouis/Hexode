@@ -9,6 +9,12 @@ public class HexBoard
     // Dictionary containing all the ships.
     Dictionary<SpaceShip, Vector2> ships;
 
+    public Dictionary<SpaceShip, Vector2> Ships {
+        get {
+            return ships;
+        }
+    }
+
     public HexBoard ()
     {
         // Initialize the ships Dictionary.

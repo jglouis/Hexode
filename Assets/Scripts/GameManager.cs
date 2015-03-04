@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour
 
         // Add it to the board.
         game.Board.Add (ship, Vector2.zero);
+
+        game.NextPhase ();
     }
 
 }
