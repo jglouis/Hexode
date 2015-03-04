@@ -460,7 +460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LineThickness: 50
   TextureScale: .5
-  AnimationSpeed: 10
+  AnimationSpeed: 2
   ArrowColor: {r: 1, g: 1, b: 1, a: 1}
   LineMaterial: {fileID: 2100000, guid: ab6b9ef580c0d4157a5919d20de37d7e, type: 2}
   ArrowEndCap: {fileID: 2800000, guid: 8f9c1207d3f3548eebdc8adf6ab8c561, type: 3}
