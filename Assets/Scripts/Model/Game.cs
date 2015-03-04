@@ -6,9 +6,33 @@ public class Player
 
 }
 
+// A delegate type for hooking up change phase notifications.
+public delegate void ChangedPhaseHandler (object sender,RoundAndPhaseEventArgs e);
+
+public class RoundAndPhaseEventArgs:EventArgs
+{
+    public int Round;
+    public Game.Phase Phase;
+    public RoundAndPhaseEventArgs (int round, Game.Phase phase)
+    {
+        this.Round = round;
+        this.Phase = phase;
+    } 
+}
+
 // Represents the game state.
 public class Game
 {
+    // Event that is fired each time a new phase begins.
+    public event ChangedPhaseHandler ChangedPhase;
+    
+    // Invoke the event.
+    void onChangedPhase (RoundAndPhaseEventArgs e)
+    {
+        if (ChangedPhase != null)
+            ChangedPhase (this, e);
+    }
+
     // Represents the phase during a round.
     public enum Phase
     {
@@ -26,24 +50,12 @@ public class Game
     int currentRound; // the current round number
     Phase currentPhase;
 
-    public int CurrentRound {
-        get {
-            return currentRound;
-        }
-    }
-
-    public Phase CurrentPhase {
-        get {
-            return currentPhase;
-        }
-    }
-
     HexBoard board;
 
-    // Create a new 2 player game.
-    public Game (Player p1, Player p2)
-    {
-        players = new Player[] {p1,p2};
+    public HexBoard Board {
+        get {
+            return board;
+        }
     }
 
     // Start the game.
@@ -66,5 +78,7 @@ public class Game
             currentRound++;
         } else
             currentPhase++;
+        
+        onChangedPhase (new RoundAndPhaseEventArgs (currentRound, currentPhase));
     }
 }

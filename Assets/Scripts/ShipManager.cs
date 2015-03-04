@@ -16,10 +16,10 @@ public class ShipManager : MonoBehaviour
 //
 //    }
 
-    // Observe the GameManager for a turn to be completed.
+    // Observe the Game for a turn to be completed.
     void Start ()
     {
-        GameManager.Instance.ChangedPhase += new ChangedPhaseHandler (UpdateBoard);
+        GameManager.Instance.Game.ChangedPhase += new ChangedPhaseHandler (UpdateBoard);
     }
 
     void UpdateBoard (object sender, RoundAndPhaseEventArgs e)

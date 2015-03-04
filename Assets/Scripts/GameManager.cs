@@ -1,20 +1,6 @@
 ﻿using UnityEngine;
 using System;
 
-// A delegate type for hooking up change phase notifications.
-public delegate void ChangedPhaseHandler (object sender,RoundAndPhaseEventArgs e);
-
-public class RoundAndPhaseEventArgs:EventArgs
-{
-    public int Round;
-    public Game.Phase Phase;
-    public RoundAndPhaseEventArgs (int round, Game.Phase phase)
-    {
-        this.Round = round;
-        this.Phase = phase;
-    } 
-}
-
 // This script will be the master script concerning the game rules.
 public class GameManager : MonoBehaviour
 {
@@ -43,29 +29,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Event that is fired each time a new phase begins.
-    public event ChangedPhaseHandler ChangedPhase;
-
-    // Invoke the event.
-    void onChangedPhase (RoundAndPhaseEventArgs e)
-    {
-        if (ChangedPhase != null)
-            ChangedPhase (this, e);
-    }
-
     // UI
     public void OnClick ()
     {
-        NextPhase ();
+        game.NextPhase ();
     }
-
-
-
-
-    // Some tests...
 
     Game game;
 
+    public Game Game {
+        get {
+            if (game == null) {
+                game = new Game ();
+            }
+            return game;
+        }
+    }
 
     void Start ()
     {
@@ -73,16 +52,14 @@ public class GameManager : MonoBehaviour
        
         Player p1 = new Player ();
         Player p2 = new Player ();
-        game = new Game (p1, p2);
+        game = Game;
         game.Start ();
 
         // Create a ship.
         SpaceShip ship = new SpaceShip (Weight.Light, 3, 1);
+
+        // Add it to the board.
+        game.Board.Add (ship, Vector2.zero);
     }
 
-    void NextPhase ()
-    {
-        game.NextPhase ();
-        onChangedPhase (new RoundAndPhaseEventArgs (game.CurrentRound, game.CurrentPhase));
-    }
 }
