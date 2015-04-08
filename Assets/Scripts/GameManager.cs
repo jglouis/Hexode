@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
                 obj.AddComponent (typeof(NetworkView));              
                 instance = obj.AddComponent (typeof(GameManager)) as GameManager;
                 obj.networkView.observed = obj.GetComponent<GameManager> ();
-                Debug.Log ("Could not locate an GameManager object. Singleton created on fly.");
+                Debug.Log ("Could not locate a GameManager object. Singleton created on fly.");
             }
       
             return instance;
