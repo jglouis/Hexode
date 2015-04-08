@@ -26,7 +26,7 @@ public static class HexUtil
         return false;	
     }
 	
-    // Return an array with all the adjacents hexagonal coordinates.
+    // GetAdjacentCoords returns an array with all the adjacents hexagonal coordinates.
     public static Vector2[] GetAdjacentCoords (Vector2 hexCoord)
     {
 		

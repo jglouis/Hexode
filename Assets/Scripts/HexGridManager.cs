@@ -70,17 +70,28 @@ public class HexGridManager : MonoBehaviour
         }       
     }   
 
-    // Return the transform coordinates, given the hexagonal coordinates (u,v) + height (h).
+    // GetHexCoordinates returns the hex coordinates, given transform coordinates.
+    public static Vector2 GetHexCoordinates (Vector3 transformCoordinates)
+    {
+        float x = transformCoordinates.x;
+        float y = transformCoordinates.y;
+
+        int u = Mathf.RoundToInt ((x * Mathf.Sqrt (3.0f) / 3.0f - y / 3.0f) / r);
+        int v = Mathf.RoundToInt (y * 2.0f / 3.0f / r);
+
+        return new Vector2 (u, v);
+    }
+
+    // GetTransformCoordinates returns the transform coordinates, given the hexagonal coordinates (u,v) + height (h).
     public static Vector3 GetTransformCoordinates (Vector2 hexCoord)
     {
 
         float u = hexCoord [0]; 
         float v = hexCoord [1];
-        float h = 0;
 
-        float x = Mathf.Sqrt (3.0f) * r * u - Mathf.Sqrt (3.0f) * r / 2.0f * v;
+        float x = Mathf.Sqrt (3.0f) * r * (u + v / 2.0f);
         float y = 3 * r * v / 2.0f;
-        return new Vector3 (x, y, h);
+        return new Vector3 (x, y, 0);
     }
 
     // Property that computes the board boundaries as rectangle coodinates.

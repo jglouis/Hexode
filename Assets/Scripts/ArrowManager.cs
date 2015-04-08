@@ -40,14 +40,27 @@ public class ArrowManager : MonoBehaviour
         pos2 = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane + 0.5f);
         pos2 = Camera.main.ScreenToWorldPoint (pos2);
 
-        // Draw the Vectrosity arrow.
-        arrow.points3.Clear ();
-        arrow.points3.Add (pos2);
-        arrow.points3.Add (pos1);
+       
+    }
+
+    void OnMouseUp ()
+    {
+        // When mouse is released, the arrow must point to the center of the hex.
+        pos2 = HexGridManager.GetTransformCoordinates (HexGridManager.GetHexCoordinates (Camera.main.ScreenToWorldPoint (Input.mousePosition)));
     }
     
     void Update ()
     {
+
+        if (Input.GetMouseButtonDown (0)) {
+            // Check the hexagon clicked.
+            Debug.Log (HexGridManager.GetHexCoordinates (Camera.main.ScreenToWorldPoint (Input.mousePosition)));
+        }
+
+        // Draw the Vectrosity arrow.
+        arrow.points3.Clear ();
+        arrow.points3.Add (pos2);
+        arrow.points3.Add (pos1);
         arrow.Draw ();
 
         arrow.textureOffset = Time.time * AnimationSpeed % 1;
